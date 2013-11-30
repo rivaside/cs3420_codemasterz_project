@@ -1,14 +1,16 @@
 #ifndef VEHICLE_H
 #define	VEHICLE_H
 
-#include "map.h"
+#include "drawengine.h"
 #include <string>
 #include <iostream>
 using namespace std;
 
 
 
-enum dir{vleft, vright, vup, vdown};
+static enum dir{vleft, vright, vup, vdown};
+
+const int CAR_SIZE= 25;
 
 struct location
 {
@@ -25,6 +27,7 @@ private:
 	location nextPos;
 	LPCSTR address[4];
 	bool end;
+	bool go;
 	
 public:
 
@@ -33,11 +36,15 @@ public:
 	vehicle(int x, int y);
 	LPCSTR getAddress();
 	dir getDirection();
+	void setDirection(dir direct);
 	location getCurrPos();
 	location getNextPos();
 	void setCurrPos(location loc);
 	void setNextPos(int x, int y);
 	void update();
+	bool move();
+	void setMove(bool mv);
+	
 
 
 

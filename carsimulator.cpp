@@ -1,5 +1,8 @@
 #include "carsimulator.h"
 #include <conio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 
 
@@ -10,26 +13,28 @@
 */
 
 
-CARSIMULATOR::CARSIMULATOR(HWND hWnd, int num_Cars, double light_speed, double car_speed)
+CARSIMULATOR::CARSIMULATOR(HWND hWnd, int num_Cars, double light_speed, double car_speed, double prog_Length)
 {
 	window_handle=hWnd;
 	
 	car=new DRAWENGINE(hWnd);
 
-	lastTime=0;
-
+	
 	numCars=num_Cars;
 
 	vehicles = new vehicle[num_Cars];
 
 	lightSpeed = light_speed;
-	lastLightTime=0;
 	carspeed=car_speed;
+	progLength = prog_Length;
 }
 
-void CARSIMULATOR::erase(int x, int y)
+void CARSIMULATOR::erase(vehicle veh, int x, int y)
 {
-	car->draw("road.bmp", x, y);
+	if (veh.getDirection()==vleft || veh.getDirection()==vright)
+	{car->draw("hroad.bmp", x, y);}
+	else if(veh.getDirection()==vup || veh.getDirection()==vdown)
+	{car->draw("vnroad.bmp", x, y);}
 }
 void CARSIMULATOR::drawMap()
 {
@@ -37,282 +42,148 @@ void CARSIMULATOR::drawMap()
 	int xpos=0;
 	int ypos=0;
 
-	for(xpos=0;xpos<1000;xpos=xpos+100)
+	for (ypos=0; ypos<700; ypos=ypos+75)
 	{
-	car->draw("road.bmp",xpos, ypos);
-		
-	}
-	ypos=50;
-	for(xpos=0;xpos<1000;xpos=xpos+100)
-	{
-	car->draw("road.bmp",xpos, ypos);
-		
-	}
-	ypos=100;for(xpos=0;xpos<1000;xpos=xpos+100)
-	{
-	car->draw("road.bmp",xpos, ypos);
-		
-	}
-	ypos=150;
-	for(xpos=0;xpos<1000;xpos=xpos+100)
-	{
-	car->draw("road.bmp",xpos, ypos);
-		
-	}
-	ypos=200;
-	for(xpos=0;xpos<1000;xpos=xpos+100)
-	{
-	car->draw("road.bmp",xpos, ypos);
-		
-	}
-	ypos=250;
-	for(xpos=0;xpos<1000;xpos=xpos+100)
-	{
-	car->draw("road.bmp",xpos, ypos);
-		
-	}
-	ypos=300;
-	for(xpos=0;xpos<1000;xpos=xpos+100)
-	{
-	car->draw("road.bmp",xpos, ypos);
-		
-	}
-	ypos=350;
-	for(xpos=0;xpos<1000;xpos=xpos+100)
-	{
-	car->draw("road.bmp",xpos, ypos);
-		
-	}
-	ypos=400;
-	for(xpos=0;xpos<1000;xpos=xpos+100)
-	{
-	car->draw("road.bmp",xpos, ypos);
-		
-	}
-	ypos=450;
-	for(xpos=0;xpos<1000;xpos=xpos+100)
-	{
-	car->draw("road.bmp",xpos, ypos);
-		
-	}
-	ypos=0;
-	xpos=0;
-
-	for(ypos=0;ypos<1000;ypos=ypos+100)
-	{
-	car->draw("vroad.bmp",xpos, ypos);
-		
+		for(xpos=0;xpos<1000;xpos=xpos+25)
+		{
+			car->draw("hroad.bmp",xpos, ypos);		
+		}
 	}
 
 	ypos=0;
 	xpos=100;
-	for(ypos=0;ypos<1000;ypos=ypos+100)
+	for (xpos=0; xpos<1000; xpos=xpos+100)
 	{
-	car->draw("vroad.bmp",xpos, ypos);
+		for(ypos=0;ypos<700;ypos=ypos+25)
+		{
+			car->draw("vnroad.bmp",xpos, ypos);
 		
+		}
 	}
-	xpos=200;
-	for(ypos=0;ypos<1000;ypos=ypos+100)
-	{
-	car->draw("vroad.bmp",xpos, ypos);
-		
-	}
-	xpos=300;
-	for(ypos=0;ypos<1000;ypos=ypos+100)
-	{
-	car->draw("vroad.bmp",xpos, ypos);
-		
-	}
-	xpos=400;
-	for(ypos=0;ypos<1000;ypos=ypos+100)
-	{
-	car->draw("vroad.bmp",xpos, ypos);
-		
-	}
-	xpos=500;
-	for(ypos=0;ypos<1000;ypos=ypos+100)
-	{
-	car->draw("vroad.bmp",xpos, ypos);
-		
-	}
-	xpos=600;
-	for(ypos=0;ypos<1000;ypos=ypos+100)
-	{
-	car->draw("vroad.bmp",xpos, ypos);
-		
-	}
-	xpos=700;
-	for(ypos=0;ypos<1000;ypos=ypos+100)
-	{
-	car->draw("vroad.bmp",xpos, ypos);
-		
-	}
-	xpos=800;
-	for(ypos=0;ypos<1000;ypos=ypos+100)
-	{
-	car->draw("vroad.bmp",xpos, ypos);
-		
-	}
-	xpos=900;
-	for(ypos=0;ypos<1000;ypos=ypos+100)
-	{
-	car->draw("vroad.bmp",xpos, ypos);
-		
-	}
-	/*
-	xpos=0;
-	ypos=0;
 	
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw("vlight.bmp",xpos, ypos);
-		
-	}
-
-	xpos=100;
-	ypos=0;
-	
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw("redgreen.bmp",xpos, ypos);
-		
-	}
-	xpos=200;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw("vlight.bmp",xpos, ypos);
-		
-	}
-	xpos=300;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw("vlight.bmp",xpos, ypos);
-		
-	}
-	xpos=400;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw("vlight.bmp",xpos, ypos);
-		
-	}
-	xpos=500;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw("vlight.bmp",xpos, ypos);
-		
-	}
-	xpos=600;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw("vlight.bmp",xpos, ypos);
-		
-	}
-	xpos=700;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw("vlight.bmp",xpos, ypos);
-		
-	}
-	xpos=800;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw("vlight.bmp",xpos, ypos);
-		
-	}
-	xpos=900;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw("vlight.bmp",xpos, ypos);
-	}
-	*/
 }
 
 void CARSIMULATOR::drawLights()
 {
 	int xpos=0, ypos=0;
 
-	for(ypos=0;ypos<500;ypos=ypos+50)
+	for (xpos=0;xpos<1000; xpos=xpos+100)
 	{
-	car->draw(streetLight.getAddress(),xpos,ypos);
+		for(ypos=0;ypos<750;ypos=ypos+75)
+		{
+			car->draw(streetLight.getAddress(),xpos,ypos);
+		}
 	}
-
-	xpos=100;
-
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw(streetLight.getAddress(),xpos,ypos);
-	}
-
-	xpos=200;
-
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw(streetLight.getAddress(),xpos,ypos);
-		
-	}
-	xpos=300;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw(streetLight.getAddress(),xpos,ypos);
-		
-	}
-	xpos=400;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw(streetLight.getAddress(),xpos,ypos);
-		
-	}
-	xpos=500;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw(streetLight.getAddress(),xpos,ypos);
-		
-	}
-	xpos=600;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw(streetLight.getAddress(),xpos,ypos);
-		
-	}
-	xpos=700;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw(streetLight.getAddress(),xpos,ypos);
-		
-	}
-	xpos=800;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw(streetLight.getAddress(),xpos,ypos);
-		
-	}
-	xpos=900;
-	for(ypos=0;ypos<500;ypos=ypos+50)
-	{
-	car->draw(streetLight.getAddress(),xpos,ypos);
-	}
-
 	
 }
 void CARSIMULATOR::checkLights(vehicle &veh)
 {
-	if ((veh.getDirection()==vright || veh.getDirection()== vleft) && (veh.getNextPos().x==0 || veh.getNextPos().x==100
-		|| veh.getNextPos().x==200 || veh.getNextPos().x==300 || veh.getNextPos().x==400
-		|| veh.getNextPos().x==500 || veh.getNextPos().x==600 || veh.getNextPos().x==700
-		|| veh.getNextPos().x==800 || veh.getNextPos().x==900 || veh.getNextPos().x==1000))
-	{
+	int random_number=0;
 
+	if ((veh.getDirection()==vright || veh.getDirection()== vleft))
+	{
+		//one way street down
+		if (veh.getNextPos().x==100|| veh.getNextPos().x==300 || veh.getNextPos().x==500 || veh.getNextPos().x==700
+		|| veh.getNextPos().x==900)
+		{
+			if (streetLight.getAddress()=="redGreen.bmp" || streetLight.getAddress()=="redYellow.bmp")
+			{
+				veh.setMove(false);
+			}
+			else
+			{
+				veh.setMove(true);
+				//srand (time(NULL));
+
+				random_number= rand() % 2 + 1;
+
+				if (random_number == 1)
+				{veh.setDirection(vdown);}
+			
+			}
+		
+		}
+		//one way street up
+		if (veh.getNextPos().x==0|| veh.getNextPos().x==200 || veh.getNextPos().x==400
+		    || veh.getNextPos().x==600 || veh.getNextPos().x==800 ||veh.getNextPos().x==1000)
+		{
+			if (streetLight.getAddress()=="redGreen.bmp" || streetLight.getAddress()=="redYellow.bmp")
+			{
+				veh.setMove(false);
+			}
+			else
+			{
+				veh.setMove(true);
+				//srand (time(NULL));
+
+				random_number= rand() % 2 + 1;
+
+				if (random_number == 1)
+				{veh.setDirection(vup);}
+			
+			}
+		
+		}
+		
+	}
+	else// (veh.getDirection()==vup || veh.getDirection()==vdown)
+	{
+		//one way street right
+		if (veh.getNextPos().y==0|| veh.getNextPos().y==150 || veh.getNextPos().y==300
+		    || veh.getNextPos().y==450 || veh.getNextPos().y==600 ||veh.getNextPos().y==750)
+		{
+			if (streetLight.getAddress()=="greenRed.bmp" || streetLight.getAddress()=="yellowRed.bmp")
+			{
+				veh.setMove(false);
+			}
+			else
+			{
+				veh.setMove(true);
+				//srand (time(NULL));
+
+				random_number= rand() % 2 + 1;
+
+				if (random_number == 1)
+				{veh.setDirection(vright);}			
+			}
+								
+		}
+		//one way street left
+		if (veh.getNextPos().y==75|| veh.getNextPos().y==225 || veh.getNextPos().y==375
+		    || veh.getNextPos().y==525 || veh.getNextPos().y==675 ||veh.getNextPos().y==825)
+		{
+			if (streetLight.getAddress()=="greenRed.bmp" || streetLight.getAddress()=="yellowRed.bmp")
+			{
+				veh.setMove(false);
+			}
+			else
+			{
+				veh.setMove(true);
+				//srand (time(NULL));
+
+				random_number= rand() % 2 + 1;
+
+				if (random_number == 1)
+				{veh.setDirection(vleft);}			
+			}
+								
+		}
 	}
 }
 
 void CARSIMULATOR::move(vehicle &veh)
 {
+	if (!veh.move())
+		return;
+	
+
+
 int x,y;
 
 x=veh.getCurrPos().x;
 y=veh.getCurrPos().y;
 
-erase(x,y);
+erase(veh, x,y);
 
 
 x= veh.getNextPos().x;
@@ -328,89 +199,45 @@ drawLights();
 
 }
 
-void CARSIMULATOR::drawImage(HWND hWnd, LPCSTR location, int x, int y)
-{
-			HBITMAP hbitmap;
-			BITMAP bitmap;
-			PAINTSTRUCT paintStruct;
-			HDC hdc= BeginPaint(hWnd, &paintStruct);
-			HDC hdcMem= CreateCompatibleDC(hdc);
-			int xpos=x;
-			int ypos=y;
-
-			hbitmap= (HBITMAP)LoadImage(NULL, location,IMAGE_BITMAP, 0,0, LR_LOADFROMFILE );
-
-			if(hbitmap == NULL)
-			 {
-				MessageBox(NULL, "Bitmap not loaded- Ensure the file 'car.bmp' is present in the project folder","Error",MB_OK);
-			 }
-	 
-			 SelectObject(hdcMem, hbitmap);
-
-			 GetObject(hbitmap, sizeof(BITMAP), &bitmap);
-	 
-			 
-			 BitBlt(hdc, xpos, ypos, bitmap.bmWidth,bitmap.bmHeight, hdcMem,0,0, SRCCOPY);
-			 			
-			 DeleteDC(hdcMem);
-			 DeleteObject(hbitmap);
-			 EndPaint(hWnd, &paintStruct);
-	
-			 
-}
-
-void CARSIMULATOR::carTimer(vehicle &veh,vehicle &veh2)
-{
-	time(&timer);
-	double currentTime = timer-lastTime;
-
-	if (currentTime<(carspeed/100))
-		return;
-	for (int i=0; i < numCars; i++)
-	{
-		move(vehicles[i]);
-	}
-	
-	time(&timer);
-	currentTime=timer-lastLightTime;
-	if (currentTime>lightSpeed)
-	{
-		streetLight.changeLight();
-	}
-	
-
-
-	time(&timer);
-	lastTime=timer;
-	lastLightTime=timer;
-}
-
 
 void CARSIMULATOR::run(HWND hWnd)
 {
 	
 	drawMap();	
-	vehicle veh1(0,100);
-	vehicle veh2;
-	
-	vehicles[0].setNextPos(0,100);
+	int pos=0;
 
-	while (vehicles[0].getCurrPos().x<1000)
+	TIMER timers(progLength, carspeed, lightSpeed);
+	vehicles[1].setNextPos(200, 150);
+
+	/*for (int i=0; i < numCars; i++)
 	{
-		carTimer(veh1, veh2);
+		vehicles[i].setNextPos(300, pos);
+		pos=pos+75;
+	}
+	*/
+	vehicles[2].setNextPos(400,600);
+
+	while (!timers.endprog())
+	{
+		if (timers.moveVehicle())
+		{
+			for (int i=0; i < numCars; i++)
+				{
+					
+					move(vehicles[i]);
+					checkLights(vehicles[i]);
+					
+					
+				}
+		}
+		if (timers.changeLight())
+		{
+			streetLight.changeLight();
+		}
+
+		timers.updateTime();
 		
 	}
-	erase(veh1.getCurrPos().x,veh1.getCurrPos().y);
 	
 
-	//car->draw(veh1.getAddress(), veh1.getNextPos().x, veh1.getNextPos().y);
-
-	//veh1.update();
-
-	
-	//car->draw("car.bmp", 0,0);
-	//erase(0,0);
-	//car->draw("car.bmp",20,0);
-
-		
 }

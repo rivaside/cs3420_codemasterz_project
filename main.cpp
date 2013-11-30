@@ -42,7 +42,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	   return 0;
     }
     
-    ShowWindow(hWnd, nCmdShow);
+	ShowWindow(hWnd, SW_MAXIMIZE);
     UpdateWindow(hWnd);
     
     while(GetMessage(&msg, NULL, 0, 0))
@@ -51,6 +51,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	   DispatchMessage(&msg);
     }
     msg.wParam;
+
+	
+
+
 }
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsgId, WPARAM wParam, LPARAM lParam)
@@ -59,11 +63,12 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsgId, WPARAM wParam, LPARAM lParam
 	{
 		case WM_PAINT:
 			{
-				int numCars=1;
-				double lightSpeed=.99;
-				double carspeed=30;
+				int numCars=3;
+				double lightSpeed=2;
+				double carspeed=.20;
+				double progLength=60;
 
-				CARSIMULATOR car(hWnd, numCars, lightSpeed, carspeed);
+				CARSIMULATOR car(hWnd, numCars, lightSpeed, carspeed, progLength);
 				car.run(hWnd);//run program inside window. pass window handle argument for window access 
 
 			 return 0;

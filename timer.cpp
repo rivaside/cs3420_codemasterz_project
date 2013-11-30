@@ -1,7 +1,7 @@
 #include "timer.h"
 
 
-TIMER::TIMER(lights* streetL, vehicle* veh, double progL)
+TIMER::TIMER(double progL, double vehS, double lightS)
 {
 time(&sysTime);
 startTime=sysTime;
@@ -13,8 +13,8 @@ lightTime=0;
 lastVehicleTime=0;
 lastLightTime=0;
 progLength=progL;
-streetLights=streetL;
-vehicles=veh;
+carSpeed=vehS;
+lightSpeed=lightS;
 
 }
 
@@ -27,10 +27,10 @@ void TIMER::updateTime()
 
 bool TIMER::moveVehicle()
 {
-	vehicleTime=runTime-lastVehicleTime;
+	vehicleTime=(runTime-lastVehicleTime)/100;
 	
 
-	if (vehicleTime<carSpeed)
+	if (vehicleTime<(carSpeed/100))
 	{return false;}
 	else
 	{

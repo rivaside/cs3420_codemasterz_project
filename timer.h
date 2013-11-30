@@ -27,7 +27,7 @@ double carSpeed;
 public:
 
 
-TIMER(lights* streetL, vehicle* veh, double progLength);
+TIMER(double progLength,double vehS, double lightS);
 bool moveVehicle();
 bool changeLight();
 void updateTime();

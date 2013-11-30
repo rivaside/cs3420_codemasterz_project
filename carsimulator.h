@@ -4,6 +4,7 @@
 #include"drawengine.h"
 #include "vehicle.h"
 #include <time.h>
+#include "timer.h"
 
 
 
@@ -12,25 +13,23 @@
 class CARSIMULATOR
 {
 private:
+
 	HWND window_handle;
-	double lastTime;
-	time_t timer;
 	vehicle *vehicles;
 	int numCars;
 	lights streetLight;
-	double lastLightTime;
 	double lightSpeed;
 	double carspeed;
+	double progLength;
 	
+
 public:
 	CARSIMULATOR()
-	{lastTime=0;}
-	CARSIMULATOR(HWND hWnd, int numCars, double lightSpeed, double carspeed);
-	void drawImage(HWND hWnd, LPCSTR location,int x, int y);//I no longer use this draw function. I used this to create the drawengine. I no longer use this. I use a drawengine object to draw images now.
+	{}
+	CARSIMULATOR(HWND hWnd, int numCars, double lightSpeed, double carspeed, double progL);
 	void run(HWND hWnd); //run program
 	void move(vehicle &veh);
-	void erase(int x, int y);
-	void carTimer(vehicle &veh, vehicle &veh2);
+	void erase(vehicle veh,int x, int y);
 	void drawLights();
 	void checkLights(vehicle &veh);
 	DRAWENGINE *car;
