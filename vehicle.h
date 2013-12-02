@@ -44,10 +44,6 @@ public:
 	void update();
 	bool move();
 	void setMove(bool mv);
-	
-
-
-
 };
 
 #endif // !VEHICLE_H

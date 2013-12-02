@@ -1,32 +1,74 @@
 #include "vehicle.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 
 
 vehicle::vehicle()
 {
 	startPos.x=0;startPos.y=0;
-	currentPos.x=0;currentPos.y=300;
-	nextPos.x=400;nextPos.y=300;
+	//currentPos.x=0;currentPos.y=300;
+	//nextPos.x=400; nextPos.y=300;
 	direction=vright;
 	address[vleft]="lcar.bmp";
 	address[vright]="rcar.bmp";
 	address[vup]="ucar.bmp";
 	address[vdown]="dcar.bmp";
 	go=true;
+
+	int random_number=0;
+
+	random_number= rand() % 10 + 1;
+
+	if (random_number == 1)
+	{currentPos.x=0; nextPos.x=0;}
+	else if (random_number==2)
+	{currentPos.x=100; nextPos.x=100;}
+	else if (random_number==3)
+	{currentPos.x=200; nextPos.x=200;}
+	else if (random_number==4)
+	{currentPos.x=300; nextPos.x=300;}
+	else if (random_number==5)
+	{currentPos.x=400; nextPos.x=400;}
+	else if (random_number==6)
+	{currentPos.x=500; nextPos.x=500;}
+	else if (random_number==7)
+	{currentPos.x=600; nextPos.x=600;}
+	else if (random_number==8)
+	{currentPos.x=700; nextPos.x=700;}
+	else if (random_number==9)
+	{currentPos.x=800; nextPos.x=800;}
+	else if (random_number==10)
+	{currentPos.x=900; nextPos.x=900;}
+
+	random_number=rand() % 10 + 1;
+
+	if (random_number==1)
+	{currentPos.y=0; nextPos.y=0;}
+	else if (random_number==2)
+	{currentPos.y=75; nextPos.y=75;}
+	else if (random_number==3)
+	{currentPos.y=150; nextPos.y=150;}
+	else if (random_number==4)
+	{currentPos.y=225; nextPos.y=225;}
+	else if (random_number==5)
+	{currentPos.y=300; nextPos.y=300;}
+	else if (random_number==6)
+	{currentPos.y=375; nextPos.y=375;}
+	else if (random_number==7)
+	{currentPos.y=450; nextPos.y=450;}
+	else if (random_number==8)
+	{currentPos.y=525; nextPos.y=525;}
+	else if (random_number==9)
+	{currentPos.y=600; nextPos.y=600;}
+	else if (random_number==10)
+	{currentPos.y=675; nextPos.y=675;}
+
+
+
+
 }
-/*vehicle::vehicle(int x, int y)
-{
-	startPos.x=0;startPos.y=0;
-	currentPos.x=x;currentPos.y=y;
-	nextPos.x=x;nextPos.y=y;
-	direction=vright;
-	address[vleft]="lcar.bmp";
-	address[vright]="rcar.bmp";
-	address[vup]="ucar.bmp";
-	address[vdown]="dcar.bmp";
-	go=true;
-}
-*/
+
 LPCSTR vehicle::getAddress()
 {
 	return address[direction];

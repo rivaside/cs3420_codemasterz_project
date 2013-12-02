@@ -207,16 +207,8 @@ void CARSIMULATOR::run(HWND hWnd)
 	int pos=0;
 
 	TIMER timers(progLength, carspeed, lightSpeed);
-	vehicles[1].setNextPos(200, 150);
-
-	/*for (int i=0; i < numCars; i++)
-	{
-		vehicles[i].setNextPos(300, pos);
-		pos=pos+75;
-	}
-	*/
-	vehicles[2].setNextPos(400,600);
-
+		
+	
 	while (!timers.endprog())
 	{
 		if (timers.moveVehicle())
