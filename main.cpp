@@ -2,6 +2,8 @@
 #include<conio.h>
 #include"carsimulator.h"
 #include"drawengine.h"
+#include <fstream>
+
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsgId, WPARAM wParam,
 							LPARAM lParam);
@@ -62,10 +64,29 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsgId, WPARAM wParam, LPARAM lParam
 	{
 		case WM_PAINT:
 			{
-				int numCars=100;
-				double lightSpeed=3;
-				double carspeed=.50;
-				double progLength=60;
+				double numberOfCars;
+				double speedOfCars;
+				double speedOfLight;
+				double durationOfProg;
+
+				fstream file;
+
+
+				file.open("simulator.txt",ios::in);
+				{
+					file >> numberOfCars;
+					file >> speedOfCars;
+					file >> speedOfLight;
+					file >> durationOfProg;
+				}
+				file.close();
+				speedOfCars=(100-speedOfCars)/100;
+
+
+				int numCars=numberOfCars;
+				double lightSpeed=speedOfLight;
+				double carspeed=speedOfCars;
+				double progLength=durationOfProg;
 
 				CARSIMULATOR car(hWnd, numCars, lightSpeed, carspeed, progLength);
 				car.run(hWnd);//run program inside window. pass window handle argument for window access 

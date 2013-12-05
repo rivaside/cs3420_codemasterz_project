@@ -21,6 +21,32 @@ vehicle::vehicle()
 
 	
 	int random_number=0;
+
+
+	random_number= rand() % 3 + 1;
+
+	if (random_number==1)
+	{
+		address[vleft]="blackCarLeft.bmp";
+		address[vright]="blackCarRight.bmp";
+		address[vup]="blackCarUp.bmp";
+		address[vdown]="blackCarDown.bmp";
+	}
+	else if (random_number==2)
+	{
+		address[vleft]="greenCarLeft.bmp";
+		address[vright]="greenCarRight.bmp";
+		address[vup]="greenCarUp.bmp";
+		address[vdown]="greenCarDown.bmp";
+	}
+	else if (random_number==3)
+	{
+		address[vleft]="blueCarLeft.bmp";
+		address[vright]="blueCarRight.bmp";
+		address[vup]="blueCarUp.bmp";
+		address[vdown]="blueCarDown.bmp";
+	}
+
 	
 
 	random_number= rand() % 10 + 1;
