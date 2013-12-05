@@ -22,18 +22,28 @@ class vehicle
 {
 private:
 	dir direction;
+
 	location startPos;
 	location currentPos;
 	location nextPos;
 	LPCSTR address[4];
 	bool end;
 	bool go;
+	bool draw;
+	bool erase;
+	int index;
 	
 public:
 
 
 	vehicle();
 	vehicle(int x, int y);
+	int getIndex();
+	void setIndex(int ind);
+	bool vdraw();
+	void setDraw(bool d);
+	bool verase();
+	void setErase(bool e);
 	LPCSTR getAddress();
 	dir getDirection();
 	void setDirection(dir direct);

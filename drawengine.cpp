@@ -17,7 +17,7 @@ void DRAWENGINE::draw(LPCSTR location, int x, int y)
 {
 	hbitmap= (HBITMAP)LoadImage(NULL, location,IMAGE_BITMAP, 0,0, LR_LOADFROMFILE );
 
-			if(hbitmap == NULL)
+			if(hbitmap == NULL|| hbitmap== 0)
 			 {
 				MessageBox(NULL, "Bitmap not loaded- Ensure the file 'car.bmp' is present in the project folder","Error",MB_OK);
 			 }

@@ -9,8 +9,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsgId, WPARAM wParam,
 //create a carsimulator object
 
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-				   LPSTR lpCmdLine, int nCmdShow)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 
     static char name[]="Traffic Simulaor";
@@ -54,7 +53,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	
 
-
+return 0;
 }
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsgId, WPARAM wParam, LPARAM lParam)
@@ -63,14 +62,14 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsgId, WPARAM wParam, LPARAM lParam
 	{
 		case WM_PAINT:
 			{
-				int numCars=1;
-				double lightSpeed=2;
-				double carspeed=.20;
-				double progLength=160;
+				int numCars=40;
+				double lightSpeed=3;
+				double carspeed=1;
+				double progLength=60;
 
 				CARSIMULATOR car(hWnd, numCars, lightSpeed, carspeed, progLength);
 				car.run(hWnd);//run program inside window. pass window handle argument for window access 
-
+				
 			 return 0;
 			}
 		case WM_DESTROY:

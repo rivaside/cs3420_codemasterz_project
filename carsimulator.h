@@ -31,6 +31,7 @@ public:
 	void move(vehicle &veh);
 	void erase(vehicle veh,int x, int y);
 	void drawLights();
+	void checkVehicle(vehicle &veh);
 	void checkLights(vehicle &veh);
 	DRAWENGINE *car;
 	void drawMap();

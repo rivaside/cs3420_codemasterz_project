@@ -1,6 +1,7 @@
 #include "vehicle.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 
 
@@ -15,8 +16,12 @@ vehicle::vehicle()
 	address[vup]="ucar.bmp";
 	address[vdown]="dcar.bmp";
 	go=true;
+	draw=false;
+	erase=false;
 
+	
 	int random_number=0;
+	
 
 	random_number= rand() % 10 + 1;
 
@@ -44,29 +49,39 @@ vehicle::vehicle()
 	random_number=rand() % 10 + 1;
 
 	if (random_number==1)
-	{currentPos.y=0; nextPos.y=0;}
+	{currentPos.y=0; nextPos.y=0; direction=vright;}
 	else if (random_number==2)
-	{currentPos.y=75; nextPos.y=75;}
+	{currentPos.y=75; nextPos.y=75;direction=vleft;}
 	else if (random_number==3)
-	{currentPos.y=150; nextPos.y=150;}
+	{currentPos.y=150; nextPos.y=150;direction=vright;}
 	else if (random_number==4)
-	{currentPos.y=225; nextPos.y=225;}
+	{currentPos.y=225; nextPos.y=225;direction=vleft;}
 	else if (random_number==5)
-	{currentPos.y=300; nextPos.y=300;}
+	{currentPos.y=300; nextPos.y=300;direction=vright;}
 	else if (random_number==6)
-	{currentPos.y=375; nextPos.y=375;}
+	{currentPos.y=375; nextPos.y=375;direction=vleft;}
 	else if (random_number==7)
-	{currentPos.y=450; nextPos.y=450;}
+	{currentPos.y=450; nextPos.y=450;direction=vright;}
 	else if (random_number==8)
-	{currentPos.y=525; nextPos.y=525;}
+	{currentPos.y=525; nextPos.y=525;direction=vleft;}
 	else if (random_number==9)
-	{currentPos.y=600; nextPos.y=600;}
+	{currentPos.y=600; nextPos.y=600;direction=vright;}
 	else if (random_number==10)
-	{currentPos.y=675; nextPos.y=675;}
+	{currentPos.y=675; nextPos.y=675;direction=vleft;}
 
 
 
 
+}
+
+int vehicle::getIndex()
+{
+	return index;
+}
+
+void vehicle::setIndex(int ind)
+{
+	index=ind;
 }
 
 LPCSTR vehicle::getAddress()
@@ -117,4 +132,24 @@ bool vehicle::move()
 void vehicle::setMove(bool mv)
 {
 	go=mv;
+}
+
+bool vehicle::vdraw()
+{
+	return draw;
+}
+
+void vehicle::setDraw(bool d)
+{
+	draw=d;
+}
+
+bool vehicle::verase()
+{
+	return erase;
+}
+
+void vehicle::setErase(bool e)
+{
+	erase=e;
 }
