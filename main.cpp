@@ -62,9 +62,9 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsgId, WPARAM wParam, LPARAM lParam
 	{
 		case WM_PAINT:
 			{
-				int numCars=40;
+				int numCars=100;
 				double lightSpeed=3;
-				double carspeed=1;
+				double carspeed=.50;
 				double progLength=60;
 
 				CARSIMULATOR car(hWnd, numCars, lightSpeed, carspeed, progLength);

@@ -3,7 +3,7 @@
 
 TIMER::TIMER(double progL, double vehS, double lightS)
 {
-time(&sysTime);
+	sysTime= GetTickCount();
 startTime=sysTime;
 
 sysTime=0;
@@ -21,16 +21,16 @@ lightSpeed=lightS;
 
 void TIMER::updateTime()
 {
-	time(&sysTime);
+	sysTime= GetTickCount();
 	runTime = sysTime-startTime;
 }
 
 bool TIMER::moveVehicle()
 {
-	vehicleTime=(runTime-lastVehicleTime)/100;
+	vehicleTime=(runTime-lastVehicleTime)/1000;
 	
 
-	if (vehicleTime<(carSpeed/100))
+	if (vehicleTime<(carSpeed))
 	{return false;}
 	else
 	{
@@ -41,7 +41,7 @@ bool TIMER::moveVehicle()
 
 bool TIMER::changeLight()
 {
-	lightTime=runTime-lastLightTime;
+	lightTime=(runTime-lastLightTime)/1000;
 
 	if (lightTime<lightSpeed)
 	{return false;}
@@ -55,7 +55,7 @@ bool TIMER::changeLight()
 
 bool TIMER::endprog()
 {
-	if (runTime<progLength)
+	if ((runTime/1000)<progLength)
 	{return false;}
 	else
 	{return true;}

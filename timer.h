@@ -12,7 +12,7 @@ private:
 
 
 double startTime;
-time_t sysTime;
+double sysTime;
 double runTime;
 double vehicleTime;
 double lightTime;

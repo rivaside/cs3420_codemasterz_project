@@ -90,21 +90,25 @@ void CARSIMULATOR::checkLights(vehicle &veh)
 	{
 		veh.setNextPos(veh.getNextPos().x, 0);
 		veh.setDirection(vright);
+		veh.setDraw(false);
 	}
 	else if (veh.getNextPos().y>675)
 	{
 		veh.setNextPos(veh.getNextPos().x,675);
 		veh.setDirection(vleft);
+		veh.setDraw(false);
 	}
 	else if (veh.getNextPos().x<0)
 	{
 		veh.setNextPos(0, veh.getNextPos().y);
 		veh.setDirection(vup);
+		veh.setDraw(false);
 	}
 	else if (veh.getNextPos().x>900)
 	{
 		veh.setNextPos(900, veh.getNextPos().y);
 		veh.setDirection(vdown);
+		veh.setDraw(false);
 		
 	}
 	else
@@ -303,7 +307,8 @@ void CARSIMULATOR::run(HWND hWnd)
 					
 					move(vehicles[i]);
 					checkVehicle(vehicles[i]);
-					checkLights(vehicles[i]);						
+					checkLights(vehicles[i]);	
+					
 					
 				}
 		}
